@@ -1,0 +1,36 @@
+name: Wiring Sync Check
+
+on:
+  pull_request:
+    paths:
+      - '.github/skills/**'
+      - '.github/playbooks/**'
+      - '.github/instructions/**'
+      - '.github/AGENTS.md'
+      - '.github/copilot-instructions.md'
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/skills/**'
+      - '.github/playbooks/**'
+      - '.github/instructions/**'
+      - '.github/AGENTS.md'
+      - '.github/copilot-instructions.md'
+
+jobs:
+  wiring-sync:
+    name: Check skill / playbook / instruction wiring
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install ts-node
+        run: npm install -g ts-node typescript
+
+      - name: Run wiring sync check
+        run: npx ts-node .github/scripts/plan-sync.ts

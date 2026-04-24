@@ -1,0 +1,76 @@
+name: Plan Drift & Validation
+
+on:
+  pull_request:
+    paths:
+      - '.github/plan/*.plan.md'
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/plan/*.plan.md'
+
+jobs:
+  validate-plans:
+    name: Validate plan files
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install ts-node
+        run: npm install -g ts-node typescript
+
+      - name: Validate all plan files
+        run: |
+          FAILED=0
+          for plan in .github/plan/*.plan.md; do
+            [ "$plan" = ".github/plan/taskplan_TEMPLATE.md" ] && continue
+            echo "Validating: $plan"
+            npx ts-node .github/scripts/plan-validate.ts "$plan" || FAILED=1
+          done
+          exit $FAILED
+
+  check-drift:
+    name: Detect plan drift
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install ts-node
+        run: npm install -g ts-node typescript
+
+      - name: Check for drift against base branch
+        run: |
+          DRIFTED=0
+          for plan in .github/plan/*.plan.md; do
+            [ "$plan" = ".github/plan/taskplan_TEMPLATE.md" ] && continue
+
+            PLAN_CHANGED=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- "$plan")
+
+            if [ -z "$PLAN_CHANGED" ]; then
+              # Plan file unchanged — check if any other tracked files changed
+              # that would imply work was done without updating the plan
+              HEAD_HASH=$(npx ts-node .github/scripts/plan-checksum.ts "$plan" 2>/dev/null | grep STATE_HASH | cut -d= -f2)
+              BASE_HASH=$(git show origin/${{ github.base_ref }}:"$plan" 2>/dev/null | npx ts-node .github/scripts/plan-checksum.ts /dev/stdin 2>/dev/null | grep STATE_HASH | cut -d= -f2 || echo "")
+
+              if [ -n "$BASE_HASH" ] && [ "$HEAD_HASH" != "$BASE_HASH" ]; then
+                echo "DRIFT DETECTED: $plan milestone statuses changed without a plan commit"
+                DRIFTED=1
+              fi
+            else
+              echo "OK: $plan was updated in this PR"
+              npx ts-node .github/scripts/plan-checksum.ts "$plan"
+            fi
+          done
+          exit $DRIFTED
