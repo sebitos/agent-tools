@@ -34,6 +34,7 @@ This toolkit is designed to be copied into any repository's `.github/` folder. O
 - [kotlin.instructions.md](.github/instructions/kotlin.instructions.md): Idiomatic Kotlin/Android standards (Jetpack Compose, coroutines, Flow, WindowSizeClass)
 - [context-engineering.instructions.md](.github/instructions/context-engineering.instructions.md): Structuring code for better Copilot context and suggestions
 - [ai-prompt-engineering-safety-best-practices.instructions.md](.github/instructions/ai-prompt-engineering-safety-best-practices.instructions.md): Prompt safety, bias mitigation, and responsible AI usage
+- [game-design.instructions.md](.github/instructions/game-design.instructions.md): High-level game design principles — player experience, mechanics, game feel, difficulty, code patterns for game systems
 
 ## Playbooks
 
@@ -47,6 +48,9 @@ This toolkit is designed to be copied into any repository's `.github/` folder. O
 - [game-testing.playbook.md](.github/playbooks/game-testing.playbook.md): Automated game logic tests, structured playtest sessions, platform certification
 - [mobile-development.playbook.md](.github/playbooks/mobile-development.playbook.md): Design for smallest screen first, adaptive layout rules, App Store / Play Store submission checklist
 - [monorepo-workflow.playbook.md](.github/playbooks/monorepo-workflow.playbook.md): Single-repo structure for web + mobile + backend — pnpm workspaces, Turborepo, affected-only CI, coordinated releases
+- [narrative-design.playbook.md](.github/playbooks/narrative-design.playbook.md): Game narrative design workflow — narrative pillars, world bible, quest scripts, branching dialogue, playtest checklist
+- [game-level-design.playbook.md](.github/playbooks/game-level-design.playbook.md): Level design workflow — paper map → greybox → encounter layout → pacing → environment dressing
+- [game-balancing.playbook.md](.github/playbooks/game-balancing.playbook.md): Game balance workflow — balance spreadsheet, target metrics, playtest data, outlier detection, economy balance, difficulty curve
 
 ## Scripts
 
@@ -59,38 +63,98 @@ This toolkit is designed to be copied into any repository's `.github/` folder. O
 
 On-demand specialist capabilities. Each skill's `SKILL.md` defines when it should be loaded.
 
-- [acquire-codebase-knowledge](.github/skills/acquire-codebase-knowledge/SKILL.md): Map, document, and onboard into an existing codebase
-- [agent-governance](.github/skills/agent-governance/SKILL.md): Add governance, safety, and trust controls to AI agent systems
-- [agent-owasp-compliance](.github/skills/agent-owasp-compliance/SKILL.md): Check agent codebases against OWASP ASI Top 10
-- [security-review](.github/skills/security-review/SKILL.md): AI-powered codebase security scanner
-- [secret-scanning](.github/skills/secret-scanning/SKILL.md): GitHub secret scanning configuration and remediation
+### Agent & AI Safety
+
+- [agent-governance](.github/skills/agent-governance/SKILL.md): Add governance, safety, and trust controls to AI agent systems — policy files, tool allowlists, audit trails, rate limits
+- [agent-owasp-compliance](.github/skills/agent-owasp-compliance/SKILL.md): Check agent codebases against the OWASP Agentic Security Initiative (ASI) Top 10
+- [agent-supply-chain](.github/skills/agent-supply-chain/SKILL.md): Verify supply chain integrity for AI agent plugins — SHA-256 manifests, tamper detection, plugin provenance
+- [agentic-eval](.github/skills/agentic-eval/SKILL.md): Evaluate and improve AI agent outputs — self-critique loops, rubric-based scoring, evaluator-optimizer pipelines
+- [ai-prompt-engineering-safety-review](.github/skills/ai-prompt-engineering-safety-review/SKILL.md): Analyse prompts for safety, bias, security vulnerabilities, and effectiveness
+
+### Azure
+
+- [azure-architecture-autopilot](.github/skills/azure-architecture-autopilot/SKILL.md): Design or analyze Azure infrastructure — architecture diagrams, multi-region topologies, Bicep generation
+- [azure-deployment-preflight](.github/skills/azure-deployment-preflight/SKILL.md): Pre-deployment validation — Bicep/Terraform syntax, what-if analysis, RBAC permission checks
+- [azure-devops-cli](.github/skills/azure-devops-cli/SKILL.md): Manage Azure DevOps resources via CLI — projects, repos, pipelines, PRs, work items, artifacts
+- [az-cost-optimize](.github/skills/az-cost-optimize/SKILL.md): Identify and recommend Azure cost savings across a subscription
+
+### Codebase Knowledge
+
+- [acquire-codebase-knowledge](.github/skills/acquire-codebase-knowledge/SKILL.md): Map, document, and onboard into an existing codebase — architecture diagrams, module inventory, dependency graph
+
+### Documentation & Specifications
+
 - [create-readme](.github/skills/create-readme/SKILL.md): Generate a comprehensive README.md
 - [create-specification](.github/skills/create-specification/SKILL.md): Create a specification file optimized for AI consumption
-- [create-llms](.github/skills/create-llms/SKILL.md): Generate an llms.txt file for a repository
+- [create-llms](.github/skills/create-llms/SKILL.md): Generate an llms.txt file for a repository following the llms.txt specification
+- [documentation-writer](.github/skills/documentation-writer/SKILL.md): Diataxis-based technical documentation expert — tutorials, how-tos, reference, explanation
+
+### GDPR & Compliance
+
+- [gdpr-compliant](.github/skills/gdpr-compliant/SKILL.md): Apply GDPR-compliant engineering practices — data minimisation, consent, encryption, retention/deletion, breach response
+- [secret-scanning](.github/skills/secret-scanning/SKILL.md): Configure GitHub secret scanning, push protection, custom patterns, and secret alert remediation
+- [security-review](.github/skills/security-review/SKILL.md): AI-powered codebase security scanner — injection, auth/access control, secrets exposure, weak crypto, insecure dependencies
+
+### Go & MCP
+
+- [go-mcp-server-generator](.github/skills/go-mcp-server-generator/SKILL.md): Generate a complete Go MCP server project using the official `github.com/modelcontextprotocol/go-sdk`
+- [mcp-cli](.github/skills/mcp-cli/SKILL.md): Interface with MCP servers via CLI — list available tools, call MCP tools from command line
+- [mcp-copilot-studio-server-generator](.github/skills/mcp-copilot-studio-server-generator/SKILL.md): Generate an MCP server optimised for Copilot Studio — schema constraints, streamable HTTP
+- [mcp-create-adaptive-cards](.github/skills/mcp-create-adaptive-cards/SKILL.md): Create Adaptive Cards for use in MCP-connected agents and bots
+- [mcp-create-declarative-agent](.github/skills/mcp-create-declarative-agent/SKILL.md): Create declarative agents for Microsoft 365 Copilot
+- [mcp-deploy-manage-agents](.github/skills/mcp-deploy-manage-agents/SKILL.md): Deploy and manage agents in Microsoft Foundry via MCP
+- [mcp-security-audit](.github/skills/mcp-security-audit/SKILL.md): Audit MCP server configurations — hardcoded secrets, shell injection, unpinned versions, approved server lists
+
+### GTM
+
+- [gtm-0-to-1-launch](.github/skills/gtm-0-to-1-launch/SKILL.md): Launch new products from idea to first customers — early adopters, launch week playbook, 2-week experiment cycle
+- [gtm-ai-gtm](.github/skills/gtm-ai-gtm/SKILL.md): Go-to-market strategy for AI products — positioning, pricing variable-cost AI, copilot/agent/teammate framing
+- [gtm-board-and-investor-communication](.github/skills/gtm-board-and-investor-communication/SKILL.md): Board meeting preparation, investor updates, QBRs — Three Things narrative, 4-tier metric hierarchy
+- [gtm-developer-ecosystem](.github/skills/gtm-developer-ecosystem/SKILL.md): Build and scale developer-led adoption — open vs curated ecosystems, developer programs, student pipelines
+- [gtm-enterprise-account-planning](.github/skills/gtm-enterprise-account-planning/SKILL.md): Strategic account planning for enterprise deals — MEDDICC qualification, stakeholder mapping, mutual action plans
+- [gtm-enterprise-onboarding](.github/skills/gtm-enterprise-onboarding/SKILL.md): Four-phase enterprise onboarding — contract to value realization, preventing adoption cliff, Week 4 ghosting pattern
+- [gtm-operating-cadence](.github/skills/gtm-operating-cadence/SKILL.md): Meeting rhythms, metric reporting, quarterly planning, decision velocity for scaling companies
+- [gtm-partnership-architecture](.github/skills/gtm-partnership-architecture/SKILL.md): Build and scale partner ecosystems — partner tiers, co-marketing, build-vs-partner decisions
+- [gtm-positioning-strategy](.github/skills/gtm-positioning-strategy/SKILL.md): Find and own a defensible market position — messaging differentiation, Crawl-Walk-Run rollout
+- [gtm-product-led-growth](.github/skills/gtm-product-led-growth/SKILL.md): Self-serve acquisition and expansion — PLG vs sales-led decision, activation, freemium conversion
+- [gtm-technical-product-pricing](.github/skills/gtm-technical-product-pricing/SKILL.md): Pricing strategy for technical products — usage-based vs seat-based, freemium thresholds, enterprise pricing
 
 ### Game Development
 
-- [game-architecture](.github/skills/game-architecture/SKILL.md): Engine-agnostic game patterns — ECS, game loop, FSM, object pooling, event bus, save/load
-- [unity-game-builder](.github/skills/unity-game-builder/SKILL.md): Unity-specific patterns — MonoBehaviour lifecycle, ScriptableObjects, Input System, pooling, Addressables
-- [unreal-game-builder](.github/skills/unreal-game-builder/SKILL.md): Unreal Engine patterns — UObject hierarchy, macros, C++ vs Blueprint, delegates, subsystems, GC
-- [game-design-patterns](.github/skills/game-design-patterns/SKILL.md): Game feel, difficulty curves, player guidance, economy design, onboarding anti-patterns
+- [game-architecture](.github/skills/game-architecture/SKILL.md): Engine-agnostic patterns — ECS, game loop, FSM, object pooling, event bus, scene management, save/load
+- [unity-game-builder](.github/skills/unity-game-builder/SKILL.md): Unity patterns — MonoBehaviour lifecycle, ScriptableObjects, Input System, Tilemap, Cinemachine 2D, ECS/DOTS, genre patterns (Metroidvania, roguelike, shmup, top-down, turn-based)
+- [unreal-game-builder](.github/skills/unreal-game-builder/SKILL.md): Unreal Engine patterns — UObject hierarchy, UE macros, C++ vs Blueprint, Enhanced Input, GAS, delegates, subsystems, GC
+- [godot-game-builder](.github/skills/godot-game-builder/SKILL.md): Godot 4.x patterns — GDScript, Node/Scene system, signals, CharacterBody2D/3D, AnimationTree, custom Resources, export
+- [gamemaker-game-builder](.github/skills/gamemaker-game-builder/SKILL.md): GameMaker Studio 2 / GML patterns — Object/Event lifecycle, collision, Alarm timers, ds_list/ds_map, room management, export checklist
+- [phaser-game-builder](.github/skills/phaser-game-builder/SKILL.md): Phaser 3 TypeScript patterns — Scene lifecycle, texture atlases, Arcade Physics, Tiled tilemaps, Scene transitions, object pooling
+- [love2d-game-builder](.github/skills/love2d-game-builder/SKILL.md): LÖVE 11.x Lua patterns — conf.lua setup, scene manager, spritesheet quads, AABB collision, physics, audio, SpriteBatch
+- [game-design-patterns](.github/skills/game-design-patterns/SKILL.md): Engine-agnostic game design — core loop, meta loop, game feel, reward systems, difficulty curves, feedback loops, onboarding
+- [game-narrative](.github/skills/game-narrative/SKILL.md): Narrative design — branching dialogue, quest structure, character arcs, world-building, ludonarrative harmony
+- [game-theory](.github/skills/game-theory/SKILL.md): Formal game theory and player psychology — Nash equilibria, incentive structures, economy design, PvP balance
+- [game-level-design](.github/skills/game-level-design/SKILL.md): Level design — layout, player flow, encounter spaces, pacing, set-pieces, environmental storytelling
+- [game-audio](.github/skills/game-audio/SKILL.md): Game audio — adaptive music, spatial audio, SFX, bark systems, FMOD/Wwise, audio pooling, mix priorities
+- [game-ui-ux](.github/skills/game-ui-ux/SKILL.md): Game UI/UX — HUD design, menus, diegetic UI, accessibility, controller navigation, inventory interfaces
 
 ### Mobile
 
-- [ios-app-builder](.github/skills/ios-app-builder/SKILL.md): iOS/iPadOS patterns — SwiftUI, NavigationSplitView, adaptive layouts, Core Data, Keychain, App Store submission
-- [android-app-builder](.github/skills/android-app-builder/SKILL.md): Android patterns — Jetpack Compose, ViewModel, WindowSizeClass, Room, WorkManager, Play Store submission
+- [ios-app-builder](.github/skills/ios-app-builder/SKILL.md): iOS/iPadOS patterns — SwiftUI, NavigationSplitView, adaptive layouts, Core Data, Keychain, StoreKit 2, App Store submission
+- [android-app-builder](.github/skills/android-app-builder/SKILL.md): Android patterns — Jetpack Compose, ViewModel, WindowSizeClass, Room, WorkManager, Play Billing, Play Store submission
 - [mobile-app-architecture](.github/skills/mobile-app-architecture/SKILL.md): Cross-platform mobile architecture — MVVM, offline-first, adaptive navigation (phone vs tablet), deep linking, push notifications
+
+### React Migration
+
+- [react-audit-grep-patterns](.github/skills/react-audit-grep-patterns/SKILL.md): Complete grep scan library for auditing React codebases before a React 18 or 19 upgrade
+- [react18-batching-patterns](.github/skills/react18-batching-patterns/SKILL.md): Diagnose and fix automatic batching regressions in React 18 class components
+- [react18-dep-compatibility](.github/skills/react18-dep-compatibility/SKILL.md): React 18.3.1 and React 19 dependency compatibility matrix
+- [react18-enzyme-to-rtl](.github/skills/react18-enzyme-to-rtl/SKILL.md): Enzyme → React Testing Library migration patterns for React 18
+- [react18-legacy-context](.github/skills/react18-legacy-context/SKILL.md): Migrate legacy context API (contextTypes / childContextTypes) to createContext
+- [react18-lifecycle-patterns](.github/skills/react18-lifecycle-patterns/SKILL.md): Migrate unsafe lifecycle methods (componentWillMount, componentWillReceiveProps, componentWillUpdate)
+- [react18-string-refs](.github/skills/react18-string-refs/SKILL.md): Migrate string refs to React.createRef() in class components
+- [react19-concurrent-patterns](.github/skills/react19-concurrent-patterns/SKILL.md): Adopt React 19 APIs — useTransition, useDeferredValue, Suspense, use(), useOptimistic, Actions
+- [react19-source-patterns](.github/skills/react19-source-patterns/SKILL.md): React 19 source-file migration — API changes, ref handling, context updates
+- [react19-test-patterns](.github/skills/react19-test-patterns/SKILL.md): Migrate test files to React 19 — act() imports, Simulate removal, StrictMode call count changes
 
 ### Web & Full-stack
 
-- [web-app-builder](.github/skills/web-app-builder/SKILL.md): React/Next.js patterns — App Router, SSR/SSG/CSR, TanStack Query, Zustand, responsive layout, auth, performance checklist
-- [fullstack-cross-platform](.github/skills/fullstack-cross-platform/SKILL.md): Keeping web, Android, and iOS in sync — OpenAPI contract, design tokens, feature flags, API versioning, environment config per platform
-- [documentation-writer](.github/skills/documentation-writer/SKILL.md): Diataxis-based technical documentation expert
-- [go-mcp-server-generator](.github/skills/go-mcp-server-generator/SKILL.md): Generate a complete Go MCP server project
-- [azure-architecture-autopilot](.github/skills/azure-architecture-autopilot/SKILL.md): Design or analyze Azure infrastructure with diagrams
-
-## Optional
-
-- [mcp-security-audit](.github/skills/mcp-security-audit/SKILL.md): Audit MCP server configurations for security issues
-- [gdpr-compliant](.github/skills/gdpr-compliant/SKILL.md): Apply GDPR-compliant engineering practices
-- [az-cost-optimize](.github/skills/az-cost-optimize/SKILL.md): Analyze and optimize Azure resource costs
+- [web-app-builder](.github/skills/web-app-builder/SKILL.md): React/Next.js patterns — App Router, SSR/SSG/CSR, TanStack Query, Zustand, responsive layout, auth, Core Web Vitals
+- [fullstack-cross-platform](.github/skills/fullstack-cross-platform/SKILL.md): Keeping web, Android, and iOS in sync — shared OpenAPI contract, design tokens, feature flags, API versioning, release coordination
