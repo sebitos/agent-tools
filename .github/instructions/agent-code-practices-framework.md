@@ -31,6 +31,7 @@ These are enforced rules, not guidelines.
 
 - Use clear, descriptive names (no `tmp`, `val`, `x1` unless trivial).
 - Avoid unnecessary abbreviations.
+- Never use single-character variable names in loops, comprehensions, or lambdas (e.g. use `book` not `b`, `genre` not `g`, `item` not `x`). The only accepted exceptions are conventional mathematical indices (`i`, `j`, `k`) in index-only loops.
 - Code must be self-explanatory.
 - Comments explain **why**, not **what**.
 - No excessive or redundant comments.
