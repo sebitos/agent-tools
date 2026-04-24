@@ -1,0 +1,96 @@
+# agent-tools
+
+> A structured autonomous agent execution system for GitHub Copilot and coding agents. Provides a plan-first, milestone-based execution framework with enforced code practices, safety governance, and on-demand specialist skills.
+
+This toolkit is designed to be copied into any repository's `.github/` folder. Once in place, agents follow a deterministic boot sequence that enforces planning before execution, safety checks, playbook-driven implementation, and skill loading.
+
+## System Instructions
+
+- [AGENTS.md](.github/AGENTS.md): Primary entry point for autonomous agents — boot sequence, directory map, core rules
+- [copilot-instructions.md](.github/copilot-instructions.md): GitHub Copilot bootstrap — same boot sequence, skills and playbooks reference
+
+## Planning Framework
+
+- [agent-planning-framework.md](.github/instructions/agent-planning-framework.md): Core planning rules, plan file location, authority rules
+- [agent-execution-protocol.md](.github/instructions/agent-execution-protocol.md): Milestone execution loop, failure recovery, resume protocol
+- [agent-plan-generation.md](.github/instructions/agent-plan-generation.md): Pipeline for generating valid plans with playbooks pre-applied
+- [agent-playbook-selection.md](.github/instructions/agent-playbook-selection.md): Auto-detection rules for which playbooks apply to a task
+- [taskplan_TEMPLATE.md](.github/plan/taskplan_TEMPLATE.md): Template for all plan files
+
+## Code & Safety Standards
+
+- [agent-code-practices-framework.md](.github/instructions/agent-code-practices-framework.md): Mandatory coding standards enforced across all agent-generated code
+- [agent-safety.instructions.md](.github/instructions/agent-safety.instructions.md): Safety and governance rules for AI agent systems
+- [agent-skills.instructions.md](.github/instructions/agent-skills.instructions.md): Guidelines for creating and structuring SKILL.md files
+
+## Language Instructions
+
+- [python.instructions.md](.github/instructions/python.instructions.md): Idiomatic Python standards (PEP 8, type hints, error handling, testing)
+- [typescript.instructions.md](.github/instructions/typescript.instructions.md): Idiomatic TypeScript/JavaScript standards (strict mode, naming, async, React)
+- [go.instructions.md](.github/instructions/go.instructions.md): Idiomatic Go standards (Effective Go, naming, error handling, formatting)
+- [csharp.instructions.md](.github/instructions/csharp.instructions.md): Idiomatic C# standards (Unity/Godot, nullable refs, memory, async, NUnit)
+- [cpp.instructions.md](.github/instructions/cpp.instructions.md): Modern C++ standards (C++17/20, Unreal Engine, RAII, GC rules, clang-format)
+- [swift.instructions.md](.github/instructions/swift.instructions.md): Idiomatic Swift standards (SwiftUI, async/await, ARC, adaptive layouts, XCTest)
+- [kotlin.instructions.md](.github/instructions/kotlin.instructions.md): Idiomatic Kotlin/Android standards (Jetpack Compose, coroutines, Flow, WindowSizeClass)
+- [context-engineering.instructions.md](.github/instructions/context-engineering.instructions.md): Structuring code for better Copilot context and suggestions
+- [ai-prompt-engineering-safety-best-practices.instructions.md](.github/instructions/ai-prompt-engineering-safety-best-practices.instructions.md): Prompt safety, bias mitigation, and responsible AI usage
+
+## Playbooks
+
+- [api-development.playbook.md](.github/playbooks/api-development.playbook.md): RESTful API implementation — contract-first, validation, error handling
+- [testing.playbook.md](.github/playbooks/testing.playbook.md): Test pyramid, AAA structure, coverage minimums, isolation rules
+- [debugging.playbook.md](.github/playbooks/debugging.playbook.md): Systematic defect isolation and fix verification
+- [refactoring.playbook.md](.github/playbooks/refactoring.playbook.md): Behaviour-preserving code improvement
+- [accessibility-compliance.playbook.md](.github/playbooks/accessibility-compliance.playbook.md): UI/UX accessibility and compliance implementation
+- [performance.playbook.md](.github/playbooks/performance.playbook.md): Measure-first performance optimization workflow
+- [game-development.playbook.md](.github/playbooks/game-development.playbook.md): Core loop first, vertical slice, playtest loop, scope management
+- [game-testing.playbook.md](.github/playbooks/game-testing.playbook.md): Automated game logic tests, structured playtest sessions, platform certification
+- [mobile-development.playbook.md](.github/playbooks/mobile-development.playbook.md): Design for smallest screen first, adaptive layout rules, App Store / Play Store submission checklist
+- [monorepo-workflow.playbook.md](.github/playbooks/monorepo-workflow.playbook.md): Single-repo structure for web + mobile + backend — pnpm workspaces, Turborepo, affected-only CI, coordinated releases
+
+## Scripts
+
+- [generate-plan.ts](.github/scripts/generate-plan.ts): Scaffolds a new plan file from the template. Run: `npx ts-node .github/scripts/generate-plan.ts "<task name>"`
+- [plan-validate.ts](.github/scripts/plan-validate.ts): Validates a plan file has all required sections and no unfilled placeholders. Run: `npx ts-node .github/scripts/plan-validate.ts .github/plan/<task>.plan.md`
+- [plan-checksum.ts](.github/scripts/plan-checksum.ts): Computes a SHA-256 hash of milestone statuses for drift detection. Run: `npx ts-node .github/scripts/plan-checksum.ts .github/plan/<task>.plan.md`
+- [plan-sync.ts](.github/scripts/plan-sync.ts): Verifies every skill, playbook, and instruction is referenced in AGENTS.md and copilot-instructions.md. Run: `npx ts-node .github/scripts/plan-sync.ts`
+
+## Skills
+
+On-demand specialist capabilities. Each skill's `SKILL.md` defines when it should be loaded.
+
+- [acquire-codebase-knowledge](.github/skills/acquire-codebase-knowledge/SKILL.md): Map, document, and onboard into an existing codebase
+- [agent-governance](.github/skills/agent-governance/SKILL.md): Add governance, safety, and trust controls to AI agent systems
+- [agent-owasp-compliance](.github/skills/agent-owasp-compliance/SKILL.md): Check agent codebases against OWASP ASI Top 10
+- [security-review](.github/skills/security-review/SKILL.md): AI-powered codebase security scanner
+- [secret-scanning](.github/skills/secret-scanning/SKILL.md): GitHub secret scanning configuration and remediation
+- [create-readme](.github/skills/create-readme/SKILL.md): Generate a comprehensive README.md
+- [create-specification](.github/skills/create-specification/SKILL.md): Create a specification file optimized for AI consumption
+- [create-llms](.github/skills/create-llms/SKILL.md): Generate an llms.txt file for a repository
+
+### Game Development
+
+- [game-architecture](.github/skills/game-architecture/SKILL.md): Engine-agnostic game patterns — ECS, game loop, FSM, object pooling, event bus, save/load
+- [unity-game-builder](.github/skills/unity-game-builder/SKILL.md): Unity-specific patterns — MonoBehaviour lifecycle, ScriptableObjects, Input System, pooling, Addressables
+- [unreal-game-builder](.github/skills/unreal-game-builder/SKILL.md): Unreal Engine patterns — UObject hierarchy, macros, C++ vs Blueprint, delegates, subsystems, GC
+- [game-design-patterns](.github/skills/game-design-patterns/SKILL.md): Game feel, difficulty curves, player guidance, economy design, onboarding anti-patterns
+
+### Mobile
+
+- [ios-app-builder](.github/skills/ios-app-builder/SKILL.md): iOS/iPadOS patterns — SwiftUI, NavigationSplitView, adaptive layouts, Core Data, Keychain, App Store submission
+- [android-app-builder](.github/skills/android-app-builder/SKILL.md): Android patterns — Jetpack Compose, ViewModel, WindowSizeClass, Room, WorkManager, Play Store submission
+- [mobile-app-architecture](.github/skills/mobile-app-architecture/SKILL.md): Cross-platform mobile architecture — MVVM, offline-first, adaptive navigation (phone vs tablet), deep linking, push notifications
+
+### Web & Full-stack
+
+- [web-app-builder](.github/skills/web-app-builder/SKILL.md): React/Next.js patterns — App Router, SSR/SSG/CSR, TanStack Query, Zustand, responsive layout, auth, performance checklist
+- [fullstack-cross-platform](.github/skills/fullstack-cross-platform/SKILL.md): Keeping web, Android, and iOS in sync — OpenAPI contract, design tokens, feature flags, API versioning, environment config per platform
+- [documentation-writer](.github/skills/documentation-writer/SKILL.md): Diataxis-based technical documentation expert
+- [go-mcp-server-generator](.github/skills/go-mcp-server-generator/SKILL.md): Generate a complete Go MCP server project
+- [azure-architecture-autopilot](.github/skills/azure-architecture-autopilot/SKILL.md): Design or analyze Azure infrastructure with diagrams
+
+## Optional
+
+- [mcp-security-audit](.github/skills/mcp-security-audit/SKILL.md): Audit MCP server configurations for security issues
+- [gdpr-compliant](.github/skills/gdpr-compliant/SKILL.md): Apply GDPR-compliant engineering practices
+- [az-cost-optimize](.github/skills/az-cost-optimize/SKILL.md): Analyze and optimize Azure resource costs
