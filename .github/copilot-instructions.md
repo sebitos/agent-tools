@@ -93,7 +93,7 @@ Categories available:
 - **Go & MCP**: go-mcp-server-generator, mcp-cli, mcp-copilot-studio-server-generator, mcp-create-adaptive-cards, mcp-create-declarative-agent, mcp-deploy-manage-agents, mcp-security-audit
 - **GTM**: gtm-0-to-1-launch, gtm-ai-gtm, gtm-board-and-investor-communication, gtm-developer-ecosystem, gtm-enterprise-account-planning, gtm-enterprise-onboarding, gtm-operating-cadence, gtm-partnership-architecture, gtm-positioning-strategy, gtm-product-led-growth, gtm-technical-product-pricing
 - **React**: react-audit-grep-patterns, react18-batching-patterns, react18-dep-compatibility, react18-enzyme-to-rtl, react18-legacy-context, react18-lifecycle-patterns, react18-string-refs, react19-concurrent-patterns, react19-source-patterns, react19-test-patterns
-- **Game development**: game-architecture, unity-game-builder, unreal-game-builder, game-design-patterns
+- **Game development**: game-architecture, unity-game-builder, unreal-game-builder, godot-game-builder, gamemaker-game-builder, phaser-game-builder, love2d-game-builder, game-design-patterns, game-narrative, game-theory, game-level-design, game-audio, game-ui-ux
 - **Mobile**: ios-app-builder, android-app-builder, mobile-app-architecture
 - **Web & Full-stack**: web-app-builder, fullstack-cross-platform
 
@@ -108,6 +108,9 @@ Playbooks live in `/.github/playbooks/` and define HOW to implement work for spe
 - `performance.playbook.md`
 - `game-development.playbook.md`
 - `game-testing.playbook.md`
+- `narrative-design.playbook.md`
+- `game-level-design.playbook.md`
+- `game-balancing.playbook.md`
 - `mobile-development.playbook.md`
 - `monorepo-workflow.playbook.md`
 

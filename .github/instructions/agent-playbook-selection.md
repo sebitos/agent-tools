@@ -104,7 +104,7 @@ Trigger if:
 
 Trigger if:
 - Mentions: game, mechanic, player, enemy, level, spawn, health, score, game loop, core loop
-- Codebase contains Unity (.asmdef, MonoBehaviour), Unreal (.uproject, UPROPERTY), or Godot (.gd, .tscn) files
+- Codebase contains Unity (.asmdef, MonoBehaviour), Unreal (.uproject, UPROPERTY), Godot (.gd, .tscn), GameMaker (.yy, .yyp, .gml), Phaser (imports from 'phaser'), or Love2D (main.lua + conf.lua) files
 - Task involves game systems: combat, movement, inventory, AI behaviour, save/load, physics
 
 → Load: `game-development.playbook.md`
@@ -112,6 +112,15 @@ Trigger if:
 Also load `game-testing.playbook.md` when:
 - A game milestone adds or changes a system that affects player-facing behaviour
 - The task mentions playtesting, QA, or platform submission
+
+Also load `narrative-design.playbook.md` when:
+- Task mentions: story, narrative, dialogue, quest, NPC, cutscene, lore, world-building, character arc, branching dialogue
+
+Also load `game-level-design.playbook.md` when:
+- Task mentions: level, room, arena, map, zone, corridor, open world, encounter layout, blockout, greybox, level flow
+
+Also load `game-balancing.playbook.md` when:
+- Task mentions: balance, tuning, dominant strategy, win rate, difficulty, economy balance, overpowered, underpowered, numbers, stats
 
 ---
 
