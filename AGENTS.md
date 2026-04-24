@@ -59,6 +59,7 @@ How-to patterns applied during milestone execution:
 - game-development.playbook.md
 - game-testing.playbook.md
 - mobile-development.playbook.md
+- monorepo-workflow.playbook.md
 
 ### `/.github/skills/`
 On-demand specialist capabilities (loaded per task):
@@ -72,7 +73,8 @@ On-demand specialist capabilities (loaded per task):
 **GTM:** gtm-0-to-1-launch, gtm-ai-gtm, gtm-board-and-investor-communication, gtm-developer-ecosystem, gtm-enterprise-account-planning, gtm-enterprise-onboarding, gtm-operating-cadence, gtm-partnership-architecture, gtm-positioning-strategy, gtm-product-led-growth, gtm-technical-product-pricing  
 **React:** react-audit-grep-patterns, react18-batching-patterns, react18-dep-compatibility, react18-enzyme-to-rtl, react18-legacy-context, react18-lifecycle-patterns, react18-string-refs, react19-concurrent-patterns, react19-source-patterns, react19-test-patterns  
 **Game development:** game-architecture, unity-game-builder, unreal-game-builder, game-design-patterns  
-**Mobile:** ios-app-builder, android-app-builder, mobile-app-architecture
+**Mobile:** ios-app-builder, android-app-builder, mobile-app-architecture  
+**Web & Full-stack:** web-app-builder, fullstack-cross-platform
 
 Each skill has a `SKILL.md` with a `description` field that defines when it should be invoked. Load a skill when the task matches its description.
 

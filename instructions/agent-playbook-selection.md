@@ -126,6 +126,27 @@ Trigger if:
 
 ---
 
+### Web App Development
+
+Trigger if:
+- Mentions: web app, Next.js, React, SPA, SSR, SSG, frontend, web frontend, browser app
+- Codebase contains `package.json` with `next`, `react`, `vite`, or `webpack` dependencies
+- Task involves: routing, state management, responsive layout, web performance, PWA, deployment to Vercel / Netlify / Azure Static Web Apps
+
+→ Load: `monorepo-workflow.playbook.md` (if repo also contains mobile or backend apps)
+
+### Full-Stack / Cross-Platform
+
+Trigger if:
+- Project has two or more of: web app, Android app, iOS app, backend API in the same repo
+- Mentions: monorepo, single repo, keep in sync, shared backend, Turborepo, pnpm workspaces, multi-platform
+- Codebase contains `turbo.json`, `pnpm-workspace.yaml`, or an `apps/` folder with multiple sub-apps
+- Task involves: coordinated releases, feature flags across platforms, design tokens, shared packages, OpenAPI contract
+
+→ Load: `monorepo-workflow.playbook.md`
+
+---
+
 ## Multiple Playbooks
 
 - Multiple playbooks may be active simultaneously

@@ -95,6 +95,7 @@ Categories available:
 - **React**: react-audit-grep-patterns, react18-batching-patterns, react18-dep-compatibility, react18-enzyme-to-rtl, react18-legacy-context, react18-lifecycle-patterns, react18-string-refs, react19-concurrent-patterns, react19-source-patterns, react19-test-patterns
 - **Game development**: game-architecture, unity-game-builder, unreal-game-builder, game-design-patterns
 - **Mobile**: ios-app-builder, android-app-builder, mobile-app-architecture
+- **Web & Full-stack**: web-app-builder, fullstack-cross-platform
 
 ## PLAYBOOKS
 
@@ -108,6 +109,7 @@ Playbooks live in `/.github/playbooks/` and define HOW to implement work for spe
 - `game-development.playbook.md`
 - `game-testing.playbook.md`
 - `mobile-development.playbook.md`
+- `monorepo-workflow.playbook.md`
 
 ---
 
