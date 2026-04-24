@@ -3,12 +3,12 @@ name: Plan Drift & Validation
 on:
   pull_request:
     paths:
-      - '.github/plan/*.plan.md'
+      - 'plan/*.plan.md'
   push:
     branches:
       - main
     paths:
-      - '.github/plan/*.plan.md'
+      - 'plan/*.plan.md'
 
 jobs:
   validate-plans:
@@ -27,10 +27,10 @@ jobs:
       - name: Validate all plan files
         run: |
           FAILED=0
-          for plan in .github/plan/*.plan.md; do
-            [ "$plan" = ".github/plan/taskplan_TEMPLATE.md" ] && continue
+          for plan in plan/*.plan.md; do
+            [ "$plan" = "plan/taskplan_TEMPLATE.md" ] && continue
             echo "Validating: $plan"
-            npx ts-node .github/scripts/plan-validate.ts "$plan" || FAILED=1
+            npx ts-node scripts/plan-validate.ts "$plan" || FAILED=1
           done
           exit $FAILED
 
@@ -53,16 +53,16 @@ jobs:
       - name: Check for drift against base branch
         run: |
           DRIFTED=0
-          for plan in .github/plan/*.plan.md; do
-            [ "$plan" = ".github/plan/taskplan_TEMPLATE.md" ] && continue
+          for plan in plan/*.plan.md; do
+            [ "$plan" = "plan/taskplan_TEMPLATE.md" ] && continue
 
             PLAN_CHANGED=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- "$plan")
 
             if [ -z "$PLAN_CHANGED" ]; then
               # Plan file unchanged — check if any other tracked files changed
               # that would imply work was done without updating the plan
-              HEAD_HASH=$(npx ts-node .github/scripts/plan-checksum.ts "$plan" 2>/dev/null | grep STATE_HASH | cut -d= -f2)
-              BASE_HASH=$(git show origin/${{ github.base_ref }}:"$plan" 2>/dev/null | npx ts-node .github/scripts/plan-checksum.ts /dev/stdin 2>/dev/null | grep STATE_HASH | cut -d= -f2 || echo "")
+              HEAD_HASH=$(npx ts-node scripts/plan-checksum.ts "$plan" 2>/dev/null | grep STATE_HASH | cut -d= -f2)
+              BASE_HASH=$(git show origin/${{ github.base_ref }}:"$plan" 2>/dev/null | npx ts-node scripts/plan-checksum.ts /dev/stdin 2>/dev/null | grep STATE_HASH | cut -d= -f2 || echo "")
 
               if [ -n "$BASE_HASH" ] && [ "$HEAD_HASH" != "$BASE_HASH" ]; then
                 echo "DRIFT DETECTED: $plan milestone statuses changed without a plan commit"
@@ -70,7 +70,7 @@ jobs:
               fi
             else
               echo "OK: $plan was updated in this PR"
-              npx ts-node .github/scripts/plan-checksum.ts "$plan"
+              npx ts-node scripts/plan-checksum.ts "$plan"
             fi
           done
           exit $DRIFTED
