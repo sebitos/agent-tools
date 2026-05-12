@@ -2,6 +2,29 @@
 
 This repository is controlled by an autonomous agent execution system.
 
+# 🚨 MANDATORY AGENT EXECUTION PROTOCOL
+
+You MUST follow this sequence on EVERY task:
+
+1. Load all required instruction files from `.github/instructions/`
+2. Determine if a valid plan exists in `.github/plan/`
+3. If NO plan exists:
+   - You MUST generate a plan using `agent-plan-generation.md`
+   - You MUST select playbooks using `agent-playbook-selection.md`
+   - You MUST NOT write code
+4. If a plan EXISTS:
+   - You MUST follow `agent-execution-protocol.md`
+   - You MUST execute ONE milestone at a time
+   - You MUST NOT skip steps
+
+🚫 HARD RULES:
+- Writing code without a plan is FORBIDDEN
+- Skipping the planning phase is FORBIDDEN
+- Ignoring playbooks is FORBIDDEN
+
+If a user asks for code without a plan:
+→ You MUST refuse and trigger planning instead
+
 ---
 
 ## 🧠 What this repo contains
